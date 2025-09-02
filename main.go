@@ -2,6 +2,7 @@ package main
 
 import (
 	"log"
+	"url-shortener/core"
 	"url-shortener/routes"
 
 	"github.com/gin-gonic/gin"
@@ -12,6 +13,16 @@ func main() {
 	r.Use(gin.Logger())
 	r.Use(gin.Recovery())
 
+	if err := core.InitDB(); err != nil {
+		log.Fatal("Failed to connect to database:", err)
+	}
+	defer func() {
+		if err := core.Close(); err != nil {
+			log.Println("Error closing database:", err)
+		}
+	}()
+
+	// Initialize routes
 	initGroup := r.Group("/")
 	routes.InitRoutes(initGroup)
 
