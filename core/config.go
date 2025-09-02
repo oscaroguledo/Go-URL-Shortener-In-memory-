@@ -8,6 +8,7 @@ type SettingStruct struct {
 	RateLimitRequestsPerMinute int      `envconfig:"RATE_LIMIT_REQUESTS_PER_MINUTE" default:"60"`
 	RateLimitWhitelist         []string `envconfig:"RATE_LIMIT_WHITELIST" default:""`
 	DatabaseURL                string   `envconfig:"DATABASE_URL" default:"urls.db"`
+	DatabaseType               string   `envconfig:"DATABASE_TYPE" default:"sqlite3"`
 	EnableDetailedLogging      bool     `envconfig:"ENABLE_DETAILED_LOGGING" default:"false"`
 	EnableCORS                 bool     `envconfig:"ENABLE_CORS" default:"true"`
 	CORSAllowedOrigins         []string `envconfig:"CORS_ALLOWED_ORIGINS" default:"*"`

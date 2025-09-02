@@ -1,8 +1,8 @@
 package main
 
 import (
-	"log"
 	"url-shortener/core"
+	logger "url-shortener/core/middleware"
 	"url-shortener/routes"
 
 	"github.com/gin-gonic/gin"
@@ -10,15 +10,16 @@ import (
 
 func main() {
 	r := gin.Default()
-	r.Use(gin.Logger())
+	r.Use(logger.Logger())
 	r.Use(gin.Recovery())
 
 	if err := core.InitDB(); err != nil {
-		log.Fatal("Failed to connect to database:", err)
+		logger.Fatal("Error initializing database:", err)
+		return
 	}
 	defer func() {
 		if err := core.Close(); err != nil {
-			log.Println("Error closing database:", err)
+			logger.Fatal("Error closing database:", err)
 		}
 	}()
 
@@ -32,8 +33,8 @@ func main() {
 	// routes.RegisterURLRoutes(r)
 
 	if err := r.Run(":8080"); err != nil {
-		log.Fatal("Server failed to start:", err)
+		logger.Fatal("Server failed to start:", err)
 	}
 
-	log.Println("Server running on http://localhost:8080")
+	logger.Info("Server running on http://localhost:8080")
 }
