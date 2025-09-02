@@ -2,6 +2,12 @@
 A URL shortener built with Go, using the Gin web framework and SQLite3 for persistent storage. Users can submit long URLs and receive short, unique slugs in return. The system supports redirection, link expiration, and in-memory caching for performance.
 
 migrations:
+go install -tags "postgres mysql sqlite sqlserver clickhouse cassandra mongodb" github.com/golang-migrate/migrate/v4/cmd/migrate@latest
+
+export PATH=$PATH:$(go env GOPATH)/bin
+
+migrate -version
+
 # Create a new migration
 ./migrate.sh new create_urls_table
 
