@@ -1,2 +1,2 @@
 # Go-URL-Shortener-In-memory-
-A simple in-memory URL shortener built with Go. It accepts long URLs via an HTTP POST request and returns a shortened slug. Uses Go maps for quick lookup, and includes expiration logic to automatically remove expired links.
+A URL shortener built with Go, using the Gin web framework and SQLite3 for persistent storage. Users can submit long URLs and receive short, unique slugs in return. The system supports redirection, link expiration, and in-memory caching for performance.
