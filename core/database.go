@@ -12,7 +12,7 @@ var settings *SettingStruct
 
 func InitDB() error {
 	var err error
-	DB, err = gorm.Open(sqlite.Open(settings.DatabaseURL), &gorm.Config{})
+	DB, err = gorm.Open(sqlite.Open("urls.db"), &gorm.Config{})
 	if err != nil {
 		return err
 	}
